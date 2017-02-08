@@ -1,18 +1,60 @@
 {% extends "templates/layout.html" %}
+
 {% block content %}
+  <h4>CMU undergraduate applicants data from 2005 - 2017</h4>
   <div class="jumbotron">
-    <!-- <img src="https://upload.wikimedia.org/wikipedia/en/f/f2/Premier_League_Logo.svg"> -->
-    <p class="lead">This is actually byte 2</p>
-    <p><a class="btn btn-lg btn-success" href="table" role="button">view the full league table</a></p>
+    <!--<p class="lead">Explore CMU undergraduate applicants profile</p>
+    <p><a class="btn btn-lg btn-success" href="table" role="button">view the full league table</a></p>-->
+    <div id = "Plot_div">
+		<div style="text-align: center;">
+		<form>		
+  			<label><input type="radio" name="mode" value="SAT 1600" checked>All Applicants SAT</label>
+  			<label><input type="radio" name="mode" value="SAT accepted">Accepted SAT</label> 
+  			<label><input type="radio" name="mode" value="SAT Denied">Denied SAT</label>
+  			<label><input type="radio" name="mode" value="GPA Accepted">Accepted GPA</label>
+  			<label><input type="radio" name="mode" value="GPA Denied">Denied GPA</label>	
+  		</form>
+  		<div id='show'></div>
+		</div>
+		<script src="js/jquery-3.1.1.min.js"></script>
+		<script>
+				$(document).ready(function(){
+					$("#show").html("<iframe width=\"500\" height=\"300\" scrolling=\"no\" frameborder=\"no\" src=\"https://fusiontables.google.com/embedviz?containerId=googft-gviz-canvas&amp;q=select+col8%2C+count()+from+1O3JunhDFtViea0ubyBRqkpgbcbn0O13WHffgEsSO+where+col5+%3E%3D+1+and+col5+%3C%3D+800+and+col6+%3E%3D+1+and+col6+%3C%3D+800+group+by+col8+order+by+count()+asc+limit+100&amp;viz=GVIZ&amp;t=COLUMN&amp;uiversion=2&amp;gco_forceIFrame=true&amp;gco_hasLabelsColumn=true&amp;gco_vAxes=%5B%7B%22title%22%3Anull%2C+%22minValue%22%3Anull%2C+%22maxValue%22%3Anull%2C+%22useFormatFromData%22%3Atrue%2C+%22viewWindow%22%3A%7B%22max%22%3Anull%2C+%22min%22%3Anull%7D%2C+%22logScale%22%3Afalse%7D%2C%7B%22useFormatFromData%22%3Atrue%2C+%22viewWindow%22%3A%7B%22max%22%3Anull%2C+%22min%22%3Anull%7D%2C+%22minValue%22%3Anull%2C+%22maxValue%22%3Anull%2C+%22logScale%22%3Afalse%7D%5D&amp;gco_useFirstColumnAsDomain=true&amp;gco_legacyScatterChartLabels=true&amp;gco_isStacked=false&amp;gco_booleanRole=certainty&amp;gco_hAxis=%7B%22useFormatFromData%22%3Atrue%2C+%22viewWindow%22%3A%7B%22max%22%3Anull%2C+%22min%22%3Anull%7D%2C+%22minValue%22%3Anull%2C+%22maxValue%22%3Anull%2C+%22title%22%3A%22SAT+Score+with+Math+and+Verbal+Combined%22%7D&amp;gco_legend=in&amp;gco_title=CMU+All+Applicants+SAT+1600+Score+Distribution+from+2005%3A+Data+from+CollegeData.com&amp;gco_trendlines=%7B%7D&amp;gco_domainAxis=%7B%22direction%22%3A1%7D&amp;att=true&amp;width=500&amp;height=285\"></iframe>");
+			    $("input[name=mode]").on("change", function(){
+			    var n = $(this).val();
+			    switch(n)
+			    {
+			            case "SAT 1600":
+			                  $("#show").html("<iframe width=\"500\" height=\"300\" scrolling=\"no\" frameborder=\"no\" src=\"https://fusiontables.google.com/embedviz?containerId=googft-gviz-canvas&amp;q=select+col8%2C+count()+from+1O3JunhDFtViea0ubyBRqkpgbcbn0O13WHffgEsSO+where+col5+%3E%3D+1+and+col5+%3C%3D+800+and+col6+%3E%3D+1+and+col6+%3C%3D+800+group+by+col8+order+by+count()+asc+limit+100&amp;viz=GVIZ&amp;t=COLUMN&amp;uiversion=2&amp;gco_forceIFrame=true&amp;gco_hasLabelsColumn=true&amp;gco_vAxes=%5B%7B%22title%22%3Anull%2C+%22minValue%22%3Anull%2C+%22maxValue%22%3Anull%2C+%22useFormatFromData%22%3Atrue%2C+%22viewWindow%22%3A%7B%22max%22%3Anull%2C+%22min%22%3Anull%7D%2C+%22logScale%22%3Afalse%7D%2C%7B%22useFormatFromData%22%3Atrue%2C+%22viewWindow%22%3A%7B%22max%22%3Anull%2C+%22min%22%3Anull%7D%2C+%22minValue%22%3Anull%2C+%22maxValue%22%3Anull%2C+%22logScale%22%3Afalse%7D%5D&amp;gco_useFirstColumnAsDomain=true&amp;gco_legacyScatterChartLabels=true&amp;gco_isStacked=false&amp;gco_booleanRole=certainty&amp;gco_hAxis=%7B%22useFormatFromData%22%3Atrue%2C+%22viewWindow%22%3A%7B%22max%22%3Anull%2C+%22min%22%3Anull%7D%2C+%22minValue%22%3Anull%2C+%22maxValue%22%3Anull%2C+%22title%22%3A%22SAT+Score+with+Math+and+Verbal+Combined%22%7D&amp;gco_legend=in&amp;gco_title=CMU+All+Applicants+SAT+1600+Score+Distribution+from+2005%3A+Data+from+CollegeData.com&amp;gco_trendlines=%7B%7D&amp;gco_domainAxis=%7B%22direction%22%3A1%7D&amp;att=true&amp;width=500&amp;height=285\"></iframe>");
+			                  break;
+			            case "SAT accepted":
+			                  $("#show").html("<iframe width=\"500\" height=\"300\" scrolling=\"no\" frameborder=\"no\" src=\"https://fusiontables.google.com/embedviz?containerId=googft-gviz-canvas&amp;q=select+col8%2C+count()+from+1O3JunhDFtViea0ubyBRqkpgbcbn0O13WHffgEsSO+where+col12+in+(&#39;Accepted&#39;%2C+&#39;Will+Attend&#39;)+and+col5+%3E%3D+1+and+col5+%3C%3D+800+and+col6+%3E%3D+1+and+col6+%3C%3D+800+group+by+col8+order+by+count()+asc+limit+100&amp;viz=GVIZ&amp;t=COLUMN&amp;uiversion=2&amp;gco_forceIFrame=true&amp;gco_hasLabelsColumn=true&amp;gco_vAxes=%5B%7B%22title%22%3Anull%2C+%22minValue%22%3Anull%2C+%22maxValue%22%3Anull%2C+%22useFormatFromData%22%3Atrue%2C+%22viewWindow%22%3A%7B%22max%22%3Anull%2C+%22min%22%3Anull%7D%7D%2C%7B%22useFormatFromData%22%3Atrue%2C+%22viewWindow%22%3A%7B%22max%22%3Anull%2C+%22min%22%3Anull%7D%2C+%22minValue%22%3Anull%2C+%22maxValue%22%3Anull%7D%5D&amp;gco_useFirstColumnAsDomain=true&amp;gco_legacyScatterChartLabels=true&amp;gco_isStacked=false&amp;gco_booleanRole=certainty&amp;gco_hAxis=%7B%22useFormatFromData%22%3Atrue%2C+%22viewWindow%22%3A%7B%22max%22%3Anull%2C+%22min%22%3Anull%7D%2C+%22minValue%22%3Anull%2C+%22maxValue%22%3Anull%2C+%22title%22%3A%22SAT+Score+with+Math+and+Verbal+Combined%22%7D&amp;gco_legend=right&amp;gco_title=CMU+Accepted+Students+SAT+1600+Score+Distribution+from+2005%3A+Data+from+CollegeData.com&amp;width=500&amp;height=300\"></iframe>");
+			                  break;
+			            case "SAT Denied":
+			                  $("#show").html("<iframe width=\"500\" height=\"300\" scrolling=\"no\" frameborder=\"no\" src=\"https://fusiontables.google.com/embedviz?containerId=googft-gviz-canvas&amp;q=select+col8%2C+count()+from+1O3JunhDFtViea0ubyBRqkpgbcbn0O13WHffgEsSO+where+col5+%3E%3D+1+and+col5+%3C%3D+800+and+col6+%3E%3D+1+and+col6+%3C%3D+800+and+col12+%3D+&#39;Denied&#39;+group+by+col8+order+by+count()+asc+limit+100&amp;viz=GVIZ&amp;t=COLUMN&amp;uiversion=2&amp;gco_forceIFrame=true&amp;gco_hasLabelsColumn=true&amp;gco_vAxes=%5B%7B%22title%22%3Anull%2C+%22minValue%22%3Anull%2C+%22maxValue%22%3Anull%2C+%22useFormatFromData%22%3Atrue%2C+%22viewWindow%22%3A%7B%22max%22%3Anull%2C+%22min%22%3Anull%7D%7D%2C%7B%22useFormatFromData%22%3Atrue%2C+%22viewWindow%22%3A%7B%22max%22%3Anull%2C+%22min%22%3Anull%7D%2C+%22minValue%22%3Anull%2C+%22maxValue%22%3Anull%7D%5D&amp;gco_useFirstColumnAsDomain=true&amp;gco_legacyScatterChartLabels=true&amp;gco_isStacked=false&amp;gco_booleanRole=certainty&amp;gco_hAxis=%7B%22useFormatFromData%22%3Atrue%2C+%22viewWindow%22%3A%7B%22max%22%3Anull%2C+%22min%22%3Anull%7D%2C+%22minValue%22%3Anull%2C+%22maxValue%22%3Anull%2C+%22title%22%3A%22SAT+Score+with+Math+and+Verbal+Combined%22%7D&amp;gco_legend=right&amp;gco_title=CMU+Denied+Students+SAT+1600+Score+Distribution+from+2005%3A+Data+from+CollegeData.com&amp;width=500&amp;height=300\"></iframe>");
+			                  break;
+			            case "GPA Accepted":
+			            	  $("#show").html("<iframe width=\"500\" height=\"300\" scrolling=\"no\" frameborder=\"no\" src=\"https://fusiontables.google.com/embedviz?containerId=googft-gviz-canvas&amp;q=select+col4%2C+count()+from+1O3JunhDFtViea0ubyBRqkpgbcbn0O13WHffgEsSO+where+col12+in+(&#39;Accepted&#39;%2C+&#39;Will+Attend&#39;)+and+col4+%3E%3D+0.1+and+col4+%3C%3D+5+group+by+col4+order+by+count()+asc+limit+100&amp;viz=GVIZ&amp;t=COLUMN&amp;uiversion=2&amp;gco_forceIFrame=true&amp;gco_hasLabelsColumn=true&amp;gco_vAxes=%5B%7B%22title%22%3Anull%2C+%22minValue%22%3Anull%2C+%22maxValue%22%3Anull%2C+%22useFormatFromData%22%3Atrue%2C+%22viewWindow%22%3A%7B%22max%22%3Anull%2C+%22min%22%3Anull%7D%7D%2C%7B%22useFormatFromData%22%3Atrue%2C+%22viewWindow%22%3A%7B%22max%22%3Anull%2C+%22min%22%3Anull%7D%2C+%22minValue%22%3Anull%2C+%22maxValue%22%3Anull%7D%5D&amp;gco_useFirstColumnAsDomain=true&amp;gco_legacyScatterChartLabels=true&amp;gco_isStacked=false&amp;gco_booleanRole=certainty&amp;gco_hAxis=%7B%22useFormatFromData%22%3Atrue%2C+%22viewWindow%22%3A%7B%22max%22%3Anull%2C+%22min%22%3Anull%7D%2C+%22minValue%22%3Anull%2C+%22maxValue%22%3Anull%2C+%22title%22%3A%22High+School+Weighted+GPA%22%7D&amp;gco_legend=right&amp;gco_title=CMU+Accepted+Students+Weighted+GPA+Distribution+from+2005%3A+Data+from+CollegeData.com&amp;width=500&amp;height=300\"></iframe>");
+			        		  break;
+			            case "GPA Denied":
+			            	  $("#show").html("<iframe width=\"500\" height=\"300\" scrolling=\"no\" frameborder=\"no\" src=\"https://fusiontables.google.com/embedviz?containerId=googft-gviz-canvas&amp;q=select+col4%2C+count()+from+1O3JunhDFtViea0ubyBRqkpgbcbn0O13WHffgEsSO+where+col4+%3E%3D+0.1+and+col4+%3C%3D+5+and+col12+%3D+&#39;Denied&#39;+group+by+col4+order+by+count()+asc+limit+100&amp;viz=GVIZ&amp;t=COLUMN&amp;uiversion=2&amp;gco_forceIFrame=true&amp;gco_hasLabelsColumn=true&amp;gco_vAxes=%5B%7B%22title%22%3Anull%2C+%22minValue%22%3Anull%2C+%22maxValue%22%3Anull%2C+%22useFormatFromData%22%3Atrue%2C+%22viewWindow%22%3A%7B%22max%22%3Anull%2C+%22min%22%3Anull%7D%7D%2C%7B%22useFormatFromData%22%3Atrue%2C+%22viewWindow%22%3A%7B%22max%22%3Anull%2C+%22min%22%3Anull%7D%2C+%22minValue%22%3Anull%2C+%22maxValue%22%3Anull%7D%5D&amp;gco_useFirstColumnAsDomain=true&amp;gco_legacyScatterChartLabels=true&amp;gco_isStacked=false&amp;gco_booleanRole=certainty&amp;gco_hAxis=%7B%22useFormatFromData%22%3Atrue%2C+%22viewWindow%22%3A%7B%22max%22%3Anull%2C+%22min%22%3Anull%7D%2C+%22minValue%22%3Anull%2C+%22maxValue%22%3Anull%2C+%22title%22%3A%22High+School+Weighted+GPA%22%7D&amp;gco_legend=right&amp;gco_title=CMU+Denied+Students+Weighted+GPA+Distribution+from+2005%3A+Data+from+CollegeData.com&amp;width=500&amp;height=300\"></iframe>");
+			        }
+			    });
+			});
+		</script>
+		
+		<link rel="stylesheet" type="text/css" href="css/Overlap.css">
+	</div>
   </div>
   <div class="row marketing">
     <div class="col-lg-12">
-      <h4>Know the Teams</h4>
-      <p><a href="teamInfo#teams1">Where are the Premier League teams located in the UK?</a></p>
-      <p><a href="teamInfo#teams2">Who are the bigger teams in terms of market value?</a></p>
-
-      <h4>Know the League History</h4>
-      <p><a href="teamInfo#history">Who has won the league title in the past?</a></p>
+      <h4>Know and About the data</h4>
+      <ul>
+	      <li><a href="quality#complete">Completeness</a></li>
+	      <li><a href="quality#coherent">Coherence</a></li>
+		  <li><a href="quality#correct">Correctness</a></li>
+		  <li><a href="quality#accountable">Accountability</a></li>
+	  </ul>
     </div>
   </div>
 {% endblock %}
